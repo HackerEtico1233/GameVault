@@ -1,0 +1,124 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo de Juegos</title>
+  <link rel="stylesheet" href="PaginaPrincipal.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">GameVault</p>
+      <h1>Catalogo de juegos</h1>
+    </div>
+    <div class="topbarRight">
+      <div class="stats" aria-label="Resumen del catalogo">
+        <span id="totalGames">10 juegos</span>
+        <span id="favoriteCount">0 favoritos</span>
+      </div>
+      <div id="authArea">
+        <button id="loginBtn" class="loginBtn" type="button">&#9654; Iniciar sesión</button>
+        <div id="userMenu" class="userMenu" hidden>
+          <div class="userAvatar" id="userAvatar"></div>
+          <span id="userName" class="userName"></span>
+          <button id="logoutBtn" class="logoutBtn" type="button">Salir</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Modal Auth -->
+  <div id="authModal" class="modalOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modalBox">
+      <button class="modalClose" id="closeModal" type="button" aria-label="Cerrar">&#10005;</button>
+
+      <div class="authTabs">
+        <button class="authTab active" data-tab="login" type="button">Iniciar sesión</button>
+        <button class="authTab" data-tab="register" type="button">Registrarse</button>
+      </div>
+
+      <!-- Login -->
+      <div id="tabLogin" class="tabPanel">
+        <p class="modalSubtitle">Bienvenido de nuevo a <strong>GameVault</strong></p>
+        <div class="formGroup">
+          <label for="loginUser">Usuario</label>
+          <input id="loginUser" type="text" placeholder="Tu nombre de usuario" autocomplete="username">
+        </div>
+        <div class="formGroup">
+          <label for="loginPass">Contraseña</label>
+          <input id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <p id="loginError" class="formError" hidden></p>
+        <button id="loginSubmit" class="submitBtn" type="button">Entrar</button>
+      </div>
+
+      <!-- Registro -->
+      <div id="tabRegister" class="tabPanel" hidden>
+        <p class="modalSubtitle">Crea tu cuenta gratis en <strong>GameVault</strong></p>
+        <div class="formGroup">
+          <label for="regUser">Usuario</label>
+          <input id="regUser" type="text" placeholder="Elige un nombre de usuario" autocomplete="username">
+        </div>
+        <div class="formGroup">
+          <label for="regPass">Contraseña</label>
+          <input id="regPass" type="password" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+        </div>
+        <div class="formGroup">
+          <label for="regPass2">Confirmar contraseña</label>
+          <input id="regPass2" type="password" placeholder="Repite la contraseña" autocomplete="new-password">
+        </div>
+        <p id="regError" class="formError" hidden></p>
+        <button id="regSubmit" class="submitBtn" type="button">Crear cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="controls" aria-label="Herramientas de busqueda">
+      <label class="searchBox" for="searchInput">
+        <span aria-hidden="true">&#128269;</span>
+        <input id="searchInput" type="search" placeholder="Buscar por nombre, genero o plataforma">
+      </label>
+      <div class="filters">
+        <label>
+          Plataforma
+          <select id="platformFilter">
+            <option value="todos">Todos</option>
+            <option value="pc">PC</option>
+            <option value="browser">Navegador</option>
+          </select>
+        </label>
+        <label>
+          Genero
+          <select id="genreFilter">
+            <option value="todos">Todos</option>
+          </select>
+        </label>
+        <label>
+          Ordenar
+          <select id="sortFilter">
+            <option value="relevance">Popularidad</option>
+            <option value="name">Nombre A-Z</option>
+            <option value="releaseDesc">Mas recientes</option>
+            <option value="releaseAsc">Mas antiguos</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="catalogHeader">
+      <div>
+        <h2>Explora juegos gratis</h2>
+        <p id="resultText">Mostrando 10 juegos del catalogo.</p>
+      </div>
+      <button id="clearFilters" type="button">Limpiar filtros</button>
+    </section>
+
+    <section id="gameGrid" class="gameGrid" aria-live="polite"></section>
+    <p id="emptyState" class="emptyState" hidden>No encontramos juegos con esa busqueda.</p>
+  </main>
+
+  <script src="PaginaPrincipal.js"></script>
+</body>
+</html>
